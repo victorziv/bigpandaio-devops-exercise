@@ -1,7 +1,7 @@
 # BigPanda DevOps Exercise
 #### INTRO
 Good morning, Mr. Panda. Your mission, should you choose to accept it, involves the development and deployment of two nanoservices.
-Please read the following instructions before starting to implament your mission, you don't want to miss any important instruction, especially those in [General Guidelines](#general-guidelines)
+Please read the following instructions before starting to implement your mission, you don't want to miss any important instruction, especially those in [General Guidelines](#general-guidelines)
 
 #### Get your environment ready
 You'll need a linux machine with the ability to run vms.
