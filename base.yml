@@ -1,14 +1,14 @@
 ---
 - name: Common tasks FTW
   hosts: all
-  sudo: yes
+  become: yes
   pre_tasks:
     - name: Set hostname
       hostname: name={{inventory_hostname}}
 
 - name: Base bamboo service
   hosts: base
-  sudo: yes
+  become: yes
   roles:
     - { role: nodejs, tags: nodejs }
     - { role: bamboo, tags: bamboo }

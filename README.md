@@ -6,7 +6,8 @@ Please read the following instructions before starting to implement your mission
 #### Get your environment ready
 You'll need a linux machine with the ability to run vms.
 
-1. Install Ansible (Any version above 1.8 and below 2.0 should be fine).
+1. Make sure you have python 2.7 installed. (Ubuntu 14.04 is highly recommended).
+1. Install Ansible (version 2.1).
 1. Install Vagrant.
 1. Install VirtualBox.
 1. Mirror this git repo using the instructions [here](https://help.github.com/articles/duplicating-a-repository). Then clone it locally. (**Please DO NOT fork the repo**)
@@ -20,8 +21,8 @@ Your project is simple, as a DevOps panda you need to have the ability to develo
 Below, you can find the description of your tasks.
 
 ###### NodeJS/Python services
-Create two basic NodeJs/Python services, the first is panda-service which should serve static files from a directory called `resources`. The directory should contain two files, small.png and medium.png. You may use any image that you like, as long as there is a panda over there.  
-The second service shall be called big-service, and should just maintain a counter of the amount of GET requests it served, and return it on every GET request it gets.
+Create two basic NodeJs/Python services, the first is static-panda which should serve static files from a directory called `resources`. The directory should contain two files, small.png and medium.png. You may use any image that you like, as long as there is a panda over there.  
+The second service shall be called counting-panda, and should just maintain a counter of the amount of GET requests it served, and return it on every GET request it gets.
 A sample NodeJS service named bamboo-app already exists  [here](roles/bamboo/files/bamboo-app)
 
 ###### Deployment
@@ -37,7 +38,7 @@ Please make sure you have a decent `--help` in your script.
 #### Deliverables
 A GitHub Pull-Request to **YOUR DUPLICATED REPO**, containing:  
 
-1. The code for both big-service and panda-service.
+1. The code for both static-panda and counting-panda.
 1. Ansible roles which takes care of provisioning both services.
 1. Modified base.yml which install ONLY the newly written services on the base VM.
 1. **BONUS** A wrapper script on top of ansible-playbook which deploys the latest version of those services.
