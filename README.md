@@ -26,7 +26,7 @@ The second service shall be called counting-panda, and should just maintain a co
 A sample NodeJS service named bamboo-app already exists  [here](roles/bamboo/files/bamboo-app)
 
 ###### Deployment
-Create an ansible role for each of the services. The role should install the service and make sure it's ready to be used in **production** (see [General Guidelines](#general-guidelines)). 
+Create an ansible role for each of the services. The role should install the service, **run it** and make sure it's ready to be used in **production** (see [General Guidelines](#general-guidelines)). 
 A sample role for bamboo-app already exists for your convenience.  (Please note: samples are not full, and do not contain all relevant the details, you're expected to improve them, and add missing tasks).
 We understand there might be a short service downtime when re-deploying a service, that’s fine.
 
