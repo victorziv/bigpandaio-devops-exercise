@@ -49,12 +49,16 @@ The new service versions are deployed onto **base** virtual host.
 Then, the services are started / restarted. Very small downtime is encountered while the service is restarted.
 
 ### Deployment Wrapper
-Again, very simpe Bash deployment script has been thrown in to make Ansible roles applience more convenient.
+Again, very simpe Bash deployment script has been thrown in to make Ansible roles appliance more convenient.
+
 The script is named *deploy_panda_services.sh* and can be found in the root directory.
+
 It accepts a single *-s \<service\>* command line argument where service can be *static-panda*, *counting-panda* or
 *all* - for deployment both. If no argument is provided *all* is accepted as a default value.
 If the provided service name is not on the list - the run is aborted.
+
 The correspondent playbooks to be run are *static-panda.yml*, *counting-panda.yml' and *all.yml*
+
 Besides *-h* flag provides some usage description message.
 
 
