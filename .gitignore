@@ -4,3 +4,5 @@
 *.log
 *.pid
 *.keep
+*.retry
+*.dist

@@ -1,0 +1,5 @@
+---
+- name: Install pip
+  become: yes
+  apt: pkg=python-pip state=installed
+
