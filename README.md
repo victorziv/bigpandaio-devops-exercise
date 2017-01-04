@@ -2,9 +2,9 @@
 
 ### Virtual host configuration
 
-Vagrant + VirtualBox combination was used for the required services deployment and running.
-OS: Ubuntu 14.04 ( *ubuntu/trusty64* VirtualBox image )
-Ansible playbook **preset.yml** triggers the prerequisites provisioning during the virtual host start.
+* Vagrant + VirtualBox combination was used for the required services deployment and running.
+* OS: Ubuntu 14.04 ( *ubuntu/trusty64* VirtualBox image )
+* Ansible playbook **preset.yml** triggers the prerequisites provisioning during the virtual host start.
 
 ### Panda nano-services
 
