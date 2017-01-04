@@ -1,24 +1,19 @@
-# BigPanda DevOps Exercise Solution Doc
+# BigPanda DevOps Exercise
+#### INTRO
+Good morning, Mr. Panda. Your mission, should you choose to accept it, involves the development and deployment of two nanoservices.
+Please read the following instructions before starting to implement your mission, you don't want to miss any important instruction, especially those in [General Guidelines](#general-guidelines)
 
-### Virtual host configuration
+#### Get your environment ready
+You'll need a linux machine with the ability to run vms.
 
-Vagrant + VirtualBox combination was used for the required services deployment and running.
-OS: Ubuntu 14.04 ( *ubuntu/trusty64* VirtualBox image )
-Ansible playbook **preset.yml** triggers the prerequisites provisioning during the virtual host start.
-
-### Panda nano-services
-
-2 basic Python + Flask applications ( services ) has been developed. All neccessary files are kept with the
-appropriate Ansible roles.
-
-#### Static Panda
-
-The role can be found at *roles/static_panda/tasks/*.
-The code - at *roles/static_panda/files/static-panda/*
-
-
-
-
+1. Make sure you have python 2.7 installed. (Ubuntu 14.04 is highly recommended).
+1. Install Ansible (version 2.1).
+1. Install Vagrant.
+1. Install VirtualBox.
+1. Mirror this git repo using the instructions [here](https://help.github.com/articles/duplicating-a-repository). Then clone it locally. (**Please DO NOT fork the repo**)
+1. Run `vagrant up base` and make sure you can ssh into the machine using `vagrant ssh base`.
+1. Inside the vm execute `nodejs /tmp/bamboo-app/bamboo.js`.
+1. Open your browser, go to <http://localhost:8080>, you should get some information about how much we love bamboo.
 
 #### Ready for action?
 Great.  
