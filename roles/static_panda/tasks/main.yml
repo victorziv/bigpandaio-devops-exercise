@@ -1,0 +1,14 @@
+---
+
+- name: copy static-panda
+  copy: src=static-panda dest=/opt/ owner=root group=root mode=0755
+
+- shell: kill -TERM `cat supervisord.pid`
+  args:
+    chdir: /opt/static-panda/
+    removes: supervisord.pid
+    executable: /bin/bash
+
+- command: supervisord -c supervisor.conf
+  args:
+    chdir: /opt/static-panda/

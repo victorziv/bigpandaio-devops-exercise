@@ -1,0 +1,7 @@
+---
+
+- name: Base counting-panda service
+  hosts: base
+  become: yes
+  roles:
+    - { role: counting_panda, tags: counting_panda }

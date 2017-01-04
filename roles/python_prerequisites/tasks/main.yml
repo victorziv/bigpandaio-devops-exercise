@@ -1,0 +1,22 @@
+---
+- name: Install pip
+  become: yes
+  apt: pkg=python-pip state=latest update_cache=yes
+
+- name: Upgrade pip
+  become: yes
+  pip:
+      name: pip
+      version: 9.0.1
+
+- name: Install Flask
+  become: yes
+  pip:
+      name: Flask
+      version: 0.12
+
+- name: Install supervisor
+  become: yes
+  pip:
+      name: supervisor
+      version: 3.3.1

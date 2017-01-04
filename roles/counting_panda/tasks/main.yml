@@ -1,0 +1,12 @@
+---
+- name: copy counting-panda
+  copy: src=counting-panda dest=/opt/ owner=root group=root mode=0755
+
+- shell: kill -TERM `cat supervisord.pid`
+  args:
+    chdir: /opt/counting-panda/
+    removes: supervisord.pid
+
+- command: supervisord -c supervisor.conf
+  args:
+    chdir: /opt/counting-panda/

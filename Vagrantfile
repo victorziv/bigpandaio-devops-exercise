@@ -7,16 +7,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.provider "virtualbox" do |v|
     v.memory = 1024
+    v.gui = false
   end
+
+  config.ssh.insert_key = false
   
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "base.yml"
-    ansible.inventory_path = "dev"
-    ansible.host_key_checking = false
-    ansible.extra_vars = { 'ansible_connection' => 'ssh',
-                           'ansible_ssh_args' => '-o ForwardAgent=yes'
-                      	 }
-    ansible.raw_ssh_args = ['-o UserKnownHostsFile=/dev/null', '-o StrictHostKeyChecking=false']
+   ansible.verbose = "v"
+   ansible.playbook = "preset.yml"
+   ansible.inventory_path = "dev"
+   ansible.host_key_checking = false
+   ansible.extra_vars = { 'ansible_connection' => 'ssh',
+                          'ansible_ssh_args' => '-o ForwardAgent=yes'
+                     	 }
+   ansible.raw_ssh_args = ['-o UserKnownHostsFile=/dev/null', '-o StrictHostKeyChecking=false']
   end
 
   config.ssh.forward_agent = true
@@ -24,6 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Create a base machine 
   config.vm.define "base" do |base|
-      base.vm.network :forwarded_port, host: 8080, guest: 8080
+      base.vm.network :forwarded_port, host: 9191, guest: 9191
+      base.vm.network :forwarded_port, host: 9292, guest: 9292
   end
 end

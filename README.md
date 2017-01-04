@@ -1,55 +1,64 @@
-# BigPanda DevOps Exercise
-#### INTRO
-Good morning, Mr. Panda. Your mission, should you choose to accept it, involves the development and deployment of two nanoservices.
-Please read the following instructions before starting to implement your mission, you don't want to miss any important instruction, especially those in [General Guidelines](#general-guidelines)
+# BigPanda DevOps Exercise Solution Doc
 
-#### Get your environment ready
-You'll need a linux machine with the ability to run vms.
+### Virtual host configuration
 
-1. Make sure you have python 2.7 installed. (Ubuntu 14.04 is highly recommended).
-1. Install Ansible (version 2.1).
-1. Install Vagrant.
-1. Install VirtualBox.
-1. Mirror this git repo using the instructions [here](https://help.github.com/articles/duplicating-a-repository). Then clone it locally. (**Please DO NOT fork the repo**)
-1. Run `vagrant up base` and make sure you can ssh into the machine using `vagrant ssh base`.
-1. Inside the vm execute `nodejs /tmp/bamboo-app/bamboo.js`.
-1. Open your browser, go to <http://localhost:8080>, you should get some information about how much we love bamboo.
+* Vagrant + VirtualBox combination was used for the required services deployment and running.
+* OS: Ubuntu 14.04 ( *ubuntu/trusty64* VirtualBox image )
+* Ansible playbook **preset.yml** triggers the prerequisites provisioning during the virtual host start.
 
-#### Ready for action?
-Great.  
-Your project is simple, as a DevOps panda you need to have the ability to develop nanoservices and create a mechanism for deploying them.  
-Below, you can find the description of your tasks.
+### Panda nano-services
 
-###### NodeJS/Python services
-Create two basic NodeJs/Python services, the first is static-panda which should serve static files from a directory called `resources`. The directory should contain two files, small.png and medium.png. You may use any image that you like, as long as there is a panda over there.  
-The second service shall be called counting-panda, and should just maintain a counter of the amount of GET requests it served, and return it on every GET request it gets.
-A sample NodeJS service named bamboo-app already exists  [here](roles/bamboo/files/bamboo-app)
+2 basic Python + Flask applications ( services ) has been developed. All neccessary files are kept with the
+appropriate Ansible roles.
+Both application run as Python daemons and not in debug mode. The daemons are managed by *supervisor* service control
+system.
 
-###### Deployment
-Create an ansible role for each of the services. The role should install the service, **run it** and make sure it's ready to be used in **production** (see [General Guidelines](#general-guidelines)). 
-A sample role for bamboo-app already exists for your convenience.  (Please note: samples are not full, and do not contain all relevant the details, you're expected to improve them, and add missing tasks).
-We understand there might be a short service downtime when re-deploying a service, that’s fine.
+For the sake of simplicity the following improvements were NOT done:
 
-###### Wrapper
-This part is a **BONUS** part, if you find this exercise simple and short, feel free to do it.  
-Create a simple utility for deploying both services. Your utility should support deploying a single service, or all of them.  
-Please make sure you have a decent `--help` in your script.
+1. Putting the services behind a proxy web server ( like Nginx ). The request should be sent straight to the application
+   listening port.
+1. Managing supervisord-driven application as a full-blown service.  Simple command line procedures are used to stop /
+   start / restart the service.
+1. Logging is not provided.
 
-#### Deliverables
-A GitHub Pull-Request to **YOUR DUPLICATED REPO**, containing:  
+#### Static Panda
 
-1. The code for both static-panda and counting-panda.
-1. Ansible roles which takes care of provisioning both services.
-1. Modified base.yml which install ONLY the newly written services on the base VM.
-1. **BONUS** A wrapper script on top of ansible-playbook which deploys the latest version of those services.
+* The role is placed under *roles/static_panda/tasks/*.
+* The code is in *roles/static_panda/files/static-panda/*
+* Listening to the port *9191*
+* Base URL is *http://localhost:9191*
+* The URL *http://localhost:9191/small-panda* should serve a small png image from *resources* directory.
+* The URL *http://localhost:9191/medium-panda* should serve a medium png image from *resources* directory.
 
-The Pull-Request should contain a short description of the roles you created, and any other comment you’d like us to know of.
+#### Counting Panda
 
-#### General Guidelines
-Your code should be as simple as possible, yet well documented and robust.  
-Spend some time on designing your solution. 
-Think about operational use cases from the real world. Few examples:
+* The role can be found in *roles/counting_panda/tasks/*.
+* The code - in *roles/counting_panda/files/counting-panda/*
+* Listening to the port *9292*
+* Base URL is *http://localhost:9292*
 
-1. Can you run the playbook multiple times without any problem?
-1. What happens if a service crashes?
-1. How much effort will it take to create a new service?
+The app accepts any GET request and returns the total number of requests arrived starting from the last deployment.
+To preserve the counter between service restarts and in case of crashing and restore, some form of persistency had to be
+introduced. 
+In order to keep things primitive the counter is saved into *counter.txt* file placed in the application root directory.
+
+### Deployment
+As was mentioned before 2 separate roles has been created: *static_panda* and *counting_panda*.
+The latest code version is fetched by simple pulling from the GIT repository.
+The new service versions are deployed onto **base** virtual host.
+Then, the services are started / restarted. Very small downtime is encountered while the service is restarted.
+
+### Deployment Wrapper
+Again, very simpe Bash deployment script has been thrown in to make Ansible roles appliance more convenient.
+
+The script is named *deploy_panda_services.sh* and can be found in the root directory.
+
+It accepts a single *-s \<service\>* command line argument where service can be *static-panda*, *counting-panda* or
+*all* - for deployment both. If no argument is provided *all* is accepted as a default value.
+If the provided service name is not on the list - the run is aborted.
+
+The correspondent playbooks to be run are *static-panda.yml*, *counting-panda.yml* and *all.yml*
+
+Besides *-h* flag provides some usage description message.
+
+

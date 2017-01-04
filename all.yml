@@ -1,0 +1,8 @@
+---
+
+- name: Base services
+  hosts: base
+  become: yes
+  roles:
+    - { role: static_panda, tags: static_panda }
+    - { role: counting_panda, tags: counting_panda }
