@@ -19,4 +19,4 @@ ansible-playbook --connection=ssh \
     --limit="base" \
     --inventory-file=dev \
     --extra-vars="{\"ansible_connection\":\"ssh\",\"ansible_ssh_args\":\"-o ForwardAgent=yes\"}" \
-    -v base.yml
+    -v counting-panda.yml

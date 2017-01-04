@@ -17,7 +17,7 @@ def count_requests(path):
         f.write(str(new_count))
         f.truncate()
 
-    return Response(response="Path was: %s. Number of requests so far: %d" % (path, new_count), status=200)
+    return Response(response="Path was: %s. Number of GET requests so far: %d" % (path, new_count), status=200)
 # ____________________
 
 if __name__ == '__main__':
