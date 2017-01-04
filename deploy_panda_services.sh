@@ -50,9 +50,9 @@ ANSIBLE_SSH_ARGS='-o UserKnownHostsFile=/dev/null \
  
 update_latest_version() {
     cd $CURDIR
-    git checkout develop
+    git checkout master
     git checkout .
-    git pull -X theirs origin develop
+    git pull -X theirs origin master
 }
 
 validate_input() {
