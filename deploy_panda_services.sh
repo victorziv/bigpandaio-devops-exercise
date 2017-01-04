@@ -5,6 +5,10 @@ usage="$(basename "$0") [-h] [-s n] -- panda nano-services deployment to base vi
 where:
     -h  show this help text
     -s  service to deploy (default: all). 
+        Available params are:
+            -s static-panda - for static-panda service deployment 
+            -s counting-panda  - for counting-panda service deployment
+            -s all - for both services.
         The latest verstion will be pulled from the GIT repository and deployed onto base virtual host.
         After the deployment is finished the service will be re-started.
         "
