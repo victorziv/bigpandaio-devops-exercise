@@ -1,3 +1,10 @@
 ---
+
+
 - name: copy static-panda
-  copy: src=static-panda dest=/tmp/ owner=root group=root mode=0755
+  copy: src=static-panda dest=/opt/ owner=root group=root mode=0755
+
+- supervisorctl:
+    name: static-panda
+    state: restarted
+    config: /opt/static-panda/supervisor.conf
