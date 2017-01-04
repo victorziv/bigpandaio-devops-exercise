@@ -4,7 +4,7 @@ from flask import Flask, Response
 app = Flask(__name__)
 # ____________________
 
-@app.route("/",methods=["GET"] )
+@app.route("/",methods=["GET"], defaults={'path':''} )
 @app.route("/<path:path>", methods=['GET'])
 def count_requests(path):
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
