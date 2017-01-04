@@ -57,7 +57,7 @@ It accepts a single *-s \<service\>* command line argument where service can be 
 *all* - for deployment both. If no argument is provided *all* is accepted as a default value.
 If the provided service name is not on the list - the run is aborted.
 
-The correspondent playbooks to be run are *static-panda.yml*, *counting-panda.yml' and *all.yml*
+The correspondent playbooks to be run are *static-panda.yml*, *counting-panda.yml* and *all.yml*
 
 Besides *-h* flag provides some usage description message.
 
