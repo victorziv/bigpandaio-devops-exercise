@@ -1,0 +1,13 @@
+---
+- name: Common tasks FTW
+  hosts: all
+  become: yes
+  pre_tasks:
+    - name: Set hostname
+      hostname: name={{inventory_hostname}}
+
+- name: install prerequisites
+  hosts: base
+  become: yes
+  roles:
+      - { role: python_prerequisites, tags: python_prerequisites }

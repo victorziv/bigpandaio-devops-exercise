@@ -1,0 +1,3 @@
+---
+- name: copy counting-panda
+  copy: src=counting-panda dest=/tmp/ owner=root group=root mode=0755

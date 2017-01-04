@@ -1,0 +1,3 @@
+---
+- name: copy static-panda
+  copy: src=static-panda dest=/tmp/ owner=root group=root mode=0755
