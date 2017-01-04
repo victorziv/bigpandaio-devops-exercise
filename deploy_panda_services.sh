@@ -61,7 +61,7 @@ validate_input() {
     done
 
     if [ "${available}" -eq 0 ];then
-        echo "ERROR: unknown service ${SERVICE}"
+        echo "ERROR: unknown service ${SERVICE} - aborting"
         exit 1
     fi
 }
@@ -79,7 +79,7 @@ deploy_services() {
 
 main() {
     validate_input
-    update_last_version
+    update_latest_version
     deploy_services
 }
 
